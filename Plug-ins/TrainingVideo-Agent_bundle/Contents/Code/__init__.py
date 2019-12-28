@@ -174,7 +174,7 @@ class BaseMediaParser(object):
         processed = ''
         matches = re.split(r'[\.\-_]+', string)
         logDebug('re.split SOILE    ', string)
-        logDebug('matches SOILE    ', matches)
+        # logDebug('matches SOILE    ', matches)
 
         idx = 1
         if matches is not None:
