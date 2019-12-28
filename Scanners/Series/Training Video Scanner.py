@@ -12,7 +12,7 @@ YEAR_REGEX = r'^(?P<year>[0-9]{4})$'
 #LOC_WIN = '%LOCALAPPDATA%\Plex Media Server'
 #LOC_MAC = '$HOME/Library/Application Support/Plex Media Server'
 # linux docker image
-LOC_LIN = '/config/Library/Application Support/Plex Media Server'
+# LOC_LIN = '/config/Library/Application Support/Plex Media Server'
 
 #Edit Full path to the plex log
  
@@ -21,26 +21,26 @@ LOC_LIN = '/config/Library/Application Support/Plex Media Server'
 # com.michas.plex.agents.personalmedia.log
 # Scanner training_video_scanner.log
 
-loggingPath = '/config/Library/Application Support/Plex Media Server/Logs/Tutorial Plugin Logs' #Linux
+# loggingPath = '/config/Library/Application Support/Plex Media Server/Logs/Tutorial Plugin Logs' #Linux
 
 # setup logging
-LOG_FORMAT = '%(asctime)s| %(levelname)-8s| %(message)s'
-loggingPath = loggingPath +'//training_video_scanner.log'
-logging.basicConfig(filename=loggingPath, format=LOG_FORMAT, level=logging.DEBUG)
+# LOG_FORMAT = '%(asctime)s| %(levelname)-8s| %(message)s'
+# loggingPath = loggingPath +'//training_video_scanner.log'
+# logging.basicConfig(filename=loggingPath, format=LOG_FORMAT, level=logging.DEBUG)
 
 def log(methodName, message, *args):
     '''
         Create a log message given the message and arguments
     '''
-    logMsg = message
-    # Replace the arguments in the string
-    if args:
-        logMsg = message % args
+    # logMsg = message
+    # # Replace the arguments in the string
+    # if args:
+    #     logMsg = message % args
         
-    logMsg = methodName + ' :: ' + logMsg
-    print logMsg
-    # Log 
-    logging.debug(logMsg)
+    # logMsg = methodName + ' :: ' + logMsg
+    # print logMsg
+    # # Log 
+    # logging.debug(logMsg)
 
 
 
@@ -332,7 +332,7 @@ def Scan(path, files, mediaList, subdirs, language=None, root=None):
                 episodeTitle = parser.getEpisodeTitle()
                 log('Scan', 'episode title: %s', episodeTitle)
         
-                vid = Media.Episode(showTitle, seasonNumber, seasonNumber + episodeNumber, episodeTitle, seasonYear)
+                vid = Media.Episode(showTitle, seasonNumber, episodeNumber, episodeTitle, seasonYear)
                 vid.parts.append(file)
                 mediaList.append(vid)
                 break
