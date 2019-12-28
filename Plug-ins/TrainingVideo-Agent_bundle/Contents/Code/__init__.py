@@ -204,11 +204,17 @@ class BaseMediaParser(object):
     def setValues(self, match):
         # set the episode title
         #self.episodeTitle = self.scrub(self.stripPart(match.group('episodeTitle').strip()))
+        
+        self.showTitle = "test"
+        self.seasonNumber = 2
+        self.seasonTitle = "seazooon"
+        self.episodeNumber = 1
+        
+        # self.episodeNumber = int(match.group('episodeNumber').strip())
         self.showTitle = self.scrub(match.group('showTitle').strip())
         self.seasonNumber = int(match.group('seasonNumber').strip())
         self.seasonTitle = self.scrub(match.group('seasonTitle').strip())
-        self.episodeNumber = 1
-        # self.episodeNumber = 10 * self.seasonNumber + int(match.group('episodeNumber').strip())
+        self.episodeNumber = int(match.group('episodeNumber').strip())
         self.episodeTitle = self.scrub(self.stripPart(match.group('episodeTitle').strip()))
         # set the episode release date
         # if episodeMonth and episodeDay is present in the regex then the episode release date is in the file name and will be used
