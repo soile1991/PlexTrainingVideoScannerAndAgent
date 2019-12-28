@@ -332,7 +332,7 @@ def Scan(path, files, mediaList, subdirs, language=None, root=None):
                 episodeTitle = parser.getEpisodeTitle()
                 log('Scan', 'episode title: %s', episodeTitle)
         
-                vid = Media.Episode(showTitle, seasonNumber, episodeNumber, episodeTitle, seasonYear)
+                vid = Media.Episode(showTitle, seasonNumber, seasonNumber + episodeNumber, episodeTitle, seasonYear)
                 vid.parts.append(file)
                 mediaList.append(vid)
                 break
