@@ -173,6 +173,9 @@ class BaseMediaParser(object):
     def scrub(self, string):
         processed = ''
         matches = re.split(r'[\.\-_]+', string)
+        logDebug('re.split SOILE    ', string)
+        logDebug('matches SOILE    ', matches)
+
         idx = 1
         if matches is not None:
             for match in matches:
