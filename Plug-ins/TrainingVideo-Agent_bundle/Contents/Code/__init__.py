@@ -7,7 +7,7 @@ from xml.dom import minidom
 
 
 # Series agent name
-SERIES_AGENT_NAME = 'Training Video Agent'
+SERIES_AGENT_NAME = 'Tutorial Video Agent'
 
 def logDebug(methodName, message, *args):
     if bool(Prefs['logger.debug.enabled']):
@@ -293,13 +293,15 @@ class SeriesEpisodeMediaParser(BaseMediaParser):
     def getSupportedRegexes(self):
         return [
                 #Lynda.com.Angular2.for.NET.Developers\1. 4. Course Overview\01. Using the exercise files.mp4
-                r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)\.[ \d\.]+(?P<seasonTitle>[^\\/]+){0,1}[\\/](?P<showNumber>[0-9]{0})[_-]{0,1}?[\d\d]{0,1}?[_-]{0,1}?(?P<episodeNumber>\d+)\.[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
-                #Lynda.com.Angular2.for.NET.Developers\1. Course Overview\500547_01_02_XR15_SampleMovieDb.mp4
-                r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]+)_\d\d_(?P<episodeNumber>\d+)[ _]*\w\w\d\d[-\.]{0,1}[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
-                #Lynda.com.Angular2.for.NET.Developers\1. Course Overview\01_02-Using the exercise files.mp4
-                r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]*)[_-]{0,1}?[\d\d]{0,1}?[_-]{0,1}?(?P<episodeNumber>\d+)[ _-]*?[\w\w\d\d]*?[-\.]{0,1}[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
-                #Udemy Entrepreneurship For Noobees/01_-_Welcome_to_Entrepreneurship_for_Noobees/01_-_Introduction_and_Welcome.mp4
-                r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-_\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]{0})(?P<episodeNumber>\d+)[ _-]*(?P<episodeTitle>.*)\.(?P<ext>.+)$'
+                # r'(?P<showTitle>[^\/]+)[\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)\.[ \d\.]+(?P<seasonTitle>[^\/]+){0,1}[\/](?P<showNumber>[0-9]{0})[_-]{0,1}?[\d\d]{0,1}?[_-]{0,1}?(?P<episodeNumber>\d+)\.[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
+                #Lynda.com.Angular2.for.NET.Developers\1. Course Overview\01. Using the exercise files.mp4
+                r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]{0})[_-]{0,1}?[\d\d]{0,1}?[_-]{0,1}?(?P<episodeNumber>\d+)\.[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
+                # #Lynda.com.Angular2.for.NET.Developers\1. Course Overview\500547_01_02_XR15_SampleMovieDb.mp4
+                # r'(?P<showTitle>[^\/]+)[\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-\. ]+(?P<seasonTitle>[^\/]+)){0,1}[\/](?P<showNumber>[0-9]+)_\d\d_(?P<episodeNumber>\d+)[ _]*\w\w\d\d[-\.]{0,1}[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
+                # #Lynda.com.Angular2.for.NET.Developers\1. Course Overview\01_02-Using the exercise files.mp4
+                # r'(?P<showTitle>[^\/]+)[\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-\. ]+(?P<seasonTitle>[^\/]+)){0,1}[\/](?P<showNumber>[0-9]*)[_-]{0,1}?[\d\d]{0,1}?[_-]{0,1}?(?P<episodeNumber>\d+)[ _-]*?[\w\w\d\d]*?[-\.]{0,1}[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
+                # #Udemy Entrepreneurship For Noobees/01_-_Welcome_to_Entrepreneurship_for_Noobees/01_-_Introduction_and_Welcome.mp4
+                # r'(?P<showTitle>[^\/]+)[\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-_\. ]+(?P<seasonTitle>[^\/]+)){0,1}[\/](?P<showNumber>[0-9]{0})(?P<episodeNumber>\d+)[ _-]*(?P<episodeTitle>.*)\.(?P<ext>.+)$'
                 ]
 
     def setValues(self, match):
