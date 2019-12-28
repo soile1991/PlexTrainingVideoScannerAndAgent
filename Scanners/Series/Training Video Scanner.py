@@ -9,38 +9,29 @@ from mp4file import mp4file, atomsearch
 YEAR_REGEX = r'^(?P<year>[0-9]{4})$'
 
 # default PMS data location
-#LOC_WIN = '%LOCALAPPDATA%\Plex Media Server'
-#LOC_MAC = '$HOME/Library/Application Support/Plex Media Server'
-# linux docker image
-# LOC_LIN = '/config/Library/Application Support/Plex Media Server'
+LOC_WIN = '%LOCALAPPDATA%\Plex Media Server'
+LOC_MAC = '$HOME/Library/Application Support/Plex Media Server'
+LOC_LIN = '$PLEX_HOME/Library/Application Support/Plex Media Server'
 
-#Edit Full path to the plex log
- 
-# From what i understand There is 3 log files 
-# com.plexapp.system.log when you load meta data
-# com.michas.plex.agents.personalmedia.log
-# Scanner training_video_scanner.log
-
-# loggingPath = '/config/Library/Application Support/Plex Media Server/Logs/Tutorial Plugin Logs' #Linux
+loggingPath = 'P:\AppData\Plex Media Server\Logs' #os.path.expandvars(LOC_WIN)
 
 # setup logging
-# LOG_FORMAT = '%(asctime)s| %(levelname)-8s| %(message)s'
-# loggingPath = loggingPath +'//training_video_scanner.log'
-# logging.basicConfig(filename=loggingPath, format=LOG_FORMAT, level=logging.DEBUG)
+LOG_FORMAT = '%(asctime)s| %(levelname)-8s| %(message)s'
+loggingPath = loggingPath +'\\training_video_scanner.log'
+logging.basicConfig(filename=loggingPath, format=LOG_FORMAT, level=logging.DEBUG)
 
 def log(methodName, message, *args):
     '''
         Create a log message given the message and arguments
     '''
-    # logMsg = message
-    # # Replace the arguments in the string
-    # if args:
-    #     logMsg = message % args
+    logMsg = message
+    # Replace the arguments in the string
+    if args:
+        logMsg = message % args
         
-    # logMsg = methodName + ' :: ' + logMsg
-    # print logMsg
-    # # Log 
-    # logging.debug(logMsg)
+    logMsg = methodName + ' :: ' + logMsg
+    print logMsg
+    #logging.debug(logMsg)
 
 
 
@@ -198,17 +189,13 @@ class SeriesEpisodeMediaParser(BaseMediaParser):
     def getSupportedRegexes(self):
         return [
                 #Lynda.com.Angular2.for.NET.Developers\1. 4. Course Overview\01. Using the exercise files.mp4
-                # r'(?P<showTitle>[^\/]+)[\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)\.[ \d\.]+(?P<seasonTitle>[^\/]+){0,1}[\/](?P<showNumber>[0-9]{0})[_-]{0,1}?[\d\d]{0,1}?[_-]{0,1}?(?P<episodeNumber>\d+)\.[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
-                # #Lynda.com.Angular2.for.NET.Developers\1. Course Overview\01. Using the exercise files.mp4
-                r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]{0})[_-]{0,1}?[\d\d]{0,1}?[_-]{0,1}?(?P<episodeNumber>\d+)\.[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
-                # #Lynda.com.Angular2.for.NET.Developers\1. Course Overview\500547_01_02_XR15_SampleMovieDb.mp4
-                # r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]+)_\d\d_(?P<episodeNumber>\d+)[ _]*\w\w\d\d[-\.]{0,1}[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
-                # #Lynda.com.Angular2.for.NET.Developers\1. Course Overview\01_02-Using the exercise files.mp4
-                # r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]*)[_-]{0,1}?[\d\d]{0,1}?[_-]{0,1}?(?P<episodeNumber>\d+)[ _-]*?[\w\w\d\d]*?[-\.]{0,1}[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
-                # #Udemy Entrepreneurship For Noobees/01_-_Welcome_to_Entrepreneurship_for_Noobees/01_-_Introduction_and_Welcome.mp4
-                # r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-_\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]{0})(?P<episodeNumber>\d+)[ _-]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
-                #Masterclass\340-01 - lesson_name - Course_name.mp4
-                # r'(?P<showTitle>[^\\/]+)[\\/](?P<showId>[0-9]{0,4})[_-]{0,1}(?P<episodeNumber>[0-9]{0,3})[ -]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
+                r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)\.[ \d\.]+(?P<seasonTitle>[^\\/]+){0,1}[\\/](?P<showNumber>[0-9]{0})[_-]{0,1}?[\d\d]{0,1}?[_-]{0,1}?(?P<episodeNumber>\d+)\.[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
+                #Lynda.com.Angular2.for.NET.Developers\1. Course Overview\500547_01_02_XR15_SampleMovieDb.mp4
+                r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]+)_\d\d_(?P<episodeNumber>\d+)[ _]*\w\w\d\d[-\.]{0,1}[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
+                #Lynda.com.Angular2.for.NET.Developers\1. Course Overview\01_02-Using the exercise files.mp4
+                r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]*)[_-]{0,1}?[\d\d]{0,1}?[_-]{0,1}?(?P<episodeNumber>\d+)[ _-]*?[\w\w\d\d]*?[-\.]{0,1}[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
+                #Udemy Entrepreneurship For Noobees/01_-_Welcome_to_Entrepreneurship_for_Noobees/01_-_Introduction_and_Welcome.mp4
+                r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-_\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]{0})(?P<episodeNumber>\d+)[ _-]*(?P<episodeTitle>.*)\.(?P<ext>.+)$'
                 ] 
     
     def setValues(self, match):
