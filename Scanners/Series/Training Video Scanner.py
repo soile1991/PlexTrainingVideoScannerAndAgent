@@ -11,7 +11,8 @@ YEAR_REGEX = r'^(?P<year>[0-9]{4})$'
 # default PMS data location
 #LOC_WIN = '%LOCALAPPDATA%\Plex Media Server'
 #LOC_MAC = '$HOME/Library/Application Support/Plex Media Server'
-LOC_LIN = '/var/lib/plexmediaserver/Library/Application Support/Plex Media Server'
+# linux docker image
+LOC_LIN = '/config/Library/Application Support/Plex Media Server'
 
 #Edit Full path to the plex log
  
@@ -20,7 +21,7 @@ LOC_LIN = '/var/lib/plexmediaserver/Library/Application Support/Plex Media Serve
 # com.michas.plex.agents.personalmedia.log
 # Scanner training_video_scanner.log
 
-loggingPath = '/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Logs/PMS Plugin Logs' #Linux
+loggingPath = '/config/Library/Application Support/Plex Media Server/Logs/PMS Plugin Logs' #Linux
 
 # setup logging
 LOG_FORMAT = '%(asctime)s| %(levelname)-8s| %(message)s'
