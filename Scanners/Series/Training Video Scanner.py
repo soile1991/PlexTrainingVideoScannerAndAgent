@@ -9,11 +9,18 @@ from mp4file import mp4file, atomsearch
 YEAR_REGEX = r'^(?P<year>[0-9]{4})$'
 
 # default PMS data location
-LOC_WIN = '%LOCALAPPDATA%\Plex Media Server'
-LOC_MAC = '$HOME/Library/Application Support/Plex Media Server'
-LOC_LIN = '$PLEX_HOME/Library/Application Support/Plex Media Server'
+#LOC_WIN = '%LOCALAPPDATA%\Plex Media Server'
+#LOC_MAC = '$HOME/Library/Application Support/Plex Media Server'
+LOC_LIN = '/var/lib/plexmediaserver/Library/Application Support/Plex Media Server'
 
-loggingPath = '$PLEX_HOME/Library/Application Support/Plex Media Server/Logs/PMS Plugin Logs' #Linux
+#Edit Full path to the plex log
+ 
+# From what i understand There is 3 log files 
+# com.plexapp.system.log when you load meta data
+# com.michas.plex.agents.personalmedia.log
+# Scanner training_video_scanner.log
+
+loggingPath = '/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Logs/PMS Plugin Logs' #Linux
 
 # setup logging
 LOG_FORMAT = '%(asctime)s| %(levelname)-8s| %(message)s'
