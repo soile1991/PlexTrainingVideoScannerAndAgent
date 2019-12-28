@@ -3,7 +3,7 @@
 <plist version="1.0">
 	<dict>
  		<key>CFBundleIdentifier</key>
-		<string>com.michas.plex.agents.personalmedia</string>
+		<string>com.soile.plex.agents.tutorialmedia</string>
 		
        	<key>PlexAgentAttributionText</key>
         <string>
