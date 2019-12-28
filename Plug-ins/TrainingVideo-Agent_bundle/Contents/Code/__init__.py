@@ -207,7 +207,7 @@ class BaseMediaParser(object):
         self.showTitle = self.scrub(match.group('showTitle').strip())
         self.seasonNumber = int(match.group('seasonNumber').strip())
         self.seasonTitle = self.scrub(match.group('seasonTitle').strip())
-        self.episodeNumber = int(match.group('episodeNumber').strip())
+        self.episodeNumber = 10 * self.seasonNumber + int(match.group('episodeNumber').strip())
         self.episodeTitle = self.scrub(self.stripPart(match.group('episodeTitle').strip()))
         # set the episode release date
         # if episodeMonth and episodeDay is present in the regex then the episode release date is in the file name and will be used
@@ -459,26 +459,21 @@ class TrainingVideoAgentTVShows(Agent.TV_Shows):
             url = opener.open(request)
 
     def setStudioAndUpdateShowTitle(self,metadata,media):
-        if 'lynda com' in media.title.lower():
-            logDebug('Lynda.com', 'Set studio and remove Lynda.com from title')
-            media.title = media.title.replace('Lynda com','').strip()
-            metadata.title = media.title
-            metadata.studio = 'Lynda.com'
         if 'pluralsight' in media.title.lower():
             logDebug('Pluralsight.com', 'Set studio and remove Pluralsight from title')
             media.title = media.title.replace('Pluralsight','').strip()
             metadata.title = media.title
-            metadata.studio = 'Pluralsight.com'
+            metadata.studio = 'Pluralsight'
         if 'lynda' in media.title.lower():
             logDebug('Lynda.com', 'Set studio and remove Lynda.com from title')
             media.title = media.title.replace('Lynda','').strip()
             metadata.title = media.title
-            metadata.studio = 'Lynda.com'
+            metadata.studio = 'Lynda'
         if 'udemy' in media.title.lower():
             logDebug('Udemy', 'Set studio and remove Lynda.com from title')
             media.title = media.title.replace('Udemy','').strip()
             metadata.title = media.title
-            metadata.studio = 'Udemy.com'
+            metadata.studio = 'Udemy'
         if 'masterclass' in media.title.lower():
             logDebug('Masterclass', 'Set studio and remove Lynda.com from title')
             media.title = media.title.replace('Masterclass','').strip()
