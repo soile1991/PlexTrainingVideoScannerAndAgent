@@ -13,11 +13,11 @@ LOC_WIN = '%LOCALAPPDATA%\Plex Media Server'
 LOC_MAC = '$HOME/Library/Application Support/Plex Media Server'
 LOC_LIN = '/config/Library/Application Support/Plex Media Server'
 
-loggingPath = '/config/Library/Application Support/Plex Media Server/Logs/PMS Plugin Log'
+loggingPath = '/config/Library/Application Support/Plex Media Server/Logs/'
 
 # setup logging
 LOG_FORMAT = '%(asctime)s| %(levelname)-8s| %(message)s'
-loggingPath = loggingPath +'//training_video_scanner.log'
+loggingPath = loggingPath +'training_video_scanner.log'
 logging.basicConfig(filename=loggingPath, format=LOG_FORMAT, level=logging.DEBUG)
 
 def log(methodName, message, *args):
