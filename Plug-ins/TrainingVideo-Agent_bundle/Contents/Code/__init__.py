@@ -206,19 +206,21 @@ class BaseMediaParser(object):
 
     def setValues(self, match):
         # set the episode title
-        #self.episodeTitle = self.scrub(self.stripPart(match.group('episodeTitle').strip()))
-        
-        self.showTitle = "test"
-        self.seasonNumber = 2
-        self.seasonTitle = "seazooon"
-        self.episodeNumber = 1
-        
+        #self.episodeTitle = self.scrub(self.stripPart(match.group('episodeTitle').strip()))   
         # self.episodeNumber = int(match.group('episodeNumber').strip())
         self.showTitle = self.scrub(match.group('showTitle').strip())
         self.seasonNumber = int(match.group('seasonNumber').strip())
         self.seasonTitle = self.scrub(match.group('seasonTitle').strip())
         self.episodeNumber = int(match.group('episodeNumber').strip())
         self.episodeTitle = self.scrub(self.stripPart(match.group('episodeTitle').strip()))
+
+
+        logDebug('SOILE_DEBUG self.showTitle: ', self.showTitle)
+        logDebug('SOILE_DEBUG self.seasonNumber: ', self.seasonNumber)
+        logDebug('SOILE_DEBUG self.seasonTitle: ', self.seasonTitle)
+        logDebug('SOILE_DEBUG self.episodeNumber: ', self.episodeNumber)
+        logDebug('SOILE_DEBUG self.episodeTitle: ', self.episodeTitle)
+
         # set the episode release date
         # if episodeMonth and episodeDay is present in the regex then the episode release date is in the file name and will be used
         if 'episodeMonth' in match.groupdict() and 'episodeDay' in match.groupdict():
