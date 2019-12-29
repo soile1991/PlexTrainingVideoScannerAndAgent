@@ -31,7 +31,7 @@ def log(methodName, message, *args):
         
     logMsg = methodName + ' :: ' + logMsg
     print logMsg
-    #logging.debug(logMsg)
+    logging.debug(logMsg)
 
 
 
