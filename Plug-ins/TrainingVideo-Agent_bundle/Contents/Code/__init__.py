@@ -173,9 +173,6 @@ class BaseMediaParser(object):
     def scrub(self, string):
         processed = ''
         matches = re.split(r'[\.\-_]+', string)
-        logDebug('re.split SOILE    ', string)
-        # logDebug('matches SOILE    ', matches)
-
         idx = 1
         if matches is not None:
             for match in matches:
@@ -206,21 +203,12 @@ class BaseMediaParser(object):
 
     def setValues(self, match):
         # set the episode title
-        #self.episodeTitle = self.scrub(self.stripPart(match.group('episodeTitle').strip()))   
-        # self.episodeNumber = int(match.group('episodeNumber').strip())
+        #self.episodeTitle = self.scrub(self.stripPart(match.group('episodeTitle').strip()))
         self.showTitle = self.scrub(match.group('showTitle').strip())
         self.seasonNumber = int(match.group('seasonNumber').strip())
         self.seasonTitle = self.scrub(match.group('seasonTitle').strip())
         self.episodeNumber = int(match.group('episodeNumber').strip())
         self.episodeTitle = self.scrub(self.stripPart(match.group('episodeTitle').strip()))
-
-
-        logDebug('SOILE_DEBUG self.showTitle: ', self.showTitle)
-        logDebug('SOILE_DEBUG self.seasonNumber: ', self.seasonNumber)
-        logDebug('SOILE_DEBUG self.seasonTitle: ', self.seasonTitle)
-        logDebug('SOILE_DEBUG self.episodeNumber: ', self.episodeNumber)
-        logDebug('SOILE_DEBUG self.episodeTitle: ', self.episodeTitle)
-
         # set the episode release date
         # if episodeMonth and episodeDay is present in the regex then the episode release date is in the file name and will be used
         if 'episodeMonth' in match.groupdict() and 'episodeDay' in match.groupdict():
@@ -305,13 +293,13 @@ class SeriesEpisodeMediaParser(BaseMediaParser):
     def getSupportedRegexes(self):
         return [
                 #Lynda.com.Angular2.for.NET.Developers\1. 4. Course Overview\01. Using the exercise files.mp4
-                r'(?P<showTitle>[^\\]+)[\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)\.[ \d\.]+(?P<seasonTitle>[^\\]+){0,1}[\/](?P<showNumber>[0-9]{0})[_-]{0,1}?[\d\d]{0,1}?[_-]{0,1}?(?P<episodeNumber>\d+)\.[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
-                # #Lynda.com.Angular2.for.NET.Developers\1. Course Overview\500547_01_02_XR15_SampleMovieDb.mp4
-                # r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]+)_\d\d_(?P<episodeNumber>\d+)[ _]*\w\w\d\d[-\.]{0,1}[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
-                # #Lynda.com.Angular2.for.NET.Developers\1. Course Overview\01_02-Using the exercise files.mp4
-                # r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]*)[_-]{0,1}?[\d\d]{0,1}?[_-]{0,1}?(?P<episodeNumber>\d+)[ _-]*?[\w\w\d\d]*?[-\.]{0,1}[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
-                # #Udemy Entrepreneurship For Noobees/01_-_Welcome_to_Entrepreneurship_for_Noobees/01_-_Introduction_and_Welcome.mp4
-                # r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-_\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]{0})(?P<episodeNumber>\d+)[ _-]*(?P<episodeTitle>.*)\.(?P<ext>.+)$'
+                r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)\.[ \d\.]+(?P<seasonTitle>[^\\/]+){0,1}[\\/](?P<showNumber>[0-9]{0})[_-]{0,1}?[\d\d]{0,1}?[_-]{0,1}?(?P<episodeNumber>\d+)\.[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
+                #Lynda.com.Angular2.for.NET.Developers\1. Course Overview\500547_01_02_XR15_SampleMovieDb.mp4
+                r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]+)_\d\d_(?P<episodeNumber>\d+)[ _]*\w\w\d\d[-\.]{0,1}[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
+                #Lynda.com.Angular2.for.NET.Developers\1. Course Overview\01_02-Using the exercise files.mp4
+                r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]*)[_-]{0,1}?[\d\d]{0,1}?[_-]{0,1}?(?P<episodeNumber>\d+)[ _-]*?[\w\w\d\d]*?[-\.]{0,1}[ _]*(?P<episodeTitle>.*)\.(?P<ext>.+)$',
+                #Udemy Entrepreneurship For Noobees/01_-_Welcome_to_Entrepreneurship_for_Noobees/01_-_Introduction_and_Welcome.mp4
+                r'(?P<showTitle>[^\\/]+)[\\/][sc|season|chapter]*?[ ]*?(?P<seasonNumber>[0-9]+)([-_\. ]+(?P<seasonTitle>[^\\/]+)){0,1}[\\/](?P<showNumber>[0-9]{0})(?P<episodeNumber>\d+)[ _-]*(?P<episodeTitle>.*)\.(?P<ext>.+)$'
                 ]
 
     def setValues(self, match):
@@ -471,26 +459,26 @@ class TrainingVideoAgentTVShows(Agent.TV_Shows):
             url = opener.open(request)
 
     def setStudioAndUpdateShowTitle(self,metadata,media):
+        if 'lynda com' in media.title.lower():
+            logDebug('Lynda.com', 'Set studio and remove Lynda.com from title')
+            media.title = media.title.replace('Lynda com','').strip()
+            metadata.title = media.title
+            metadata.studio = 'Lynda.com'
         if 'pluralsight' in media.title.lower():
             logDebug('Pluralsight.com', 'Set studio and remove Pluralsight from title')
             media.title = media.title.replace('Pluralsight','').strip()
             metadata.title = media.title
-            metadata.studio = 'Pluralsight'
+            metadata.studio = 'Pluralsight.com'
         if 'lynda' in media.title.lower():
             logDebug('Lynda.com', 'Set studio and remove Lynda.com from title')
             media.title = media.title.replace('Lynda','').strip()
             metadata.title = media.title
-            metadata.studio = 'Lynda'
+            metadata.studio = 'Lynda.com'
         if 'udemy' in media.title.lower():
             logDebug('Udemy', 'Set studio and remove Lynda.com from title')
             media.title = media.title.replace('Udemy','').strip()
             metadata.title = media.title
-            metadata.studio = 'Udemy'
-        if 'masterclass' in media.title.lower():
-            logDebug('Masterclass', 'Set studio and remove Lynda.com from title')
-            media.title = media.title.replace('Masterclass','').strip()
-            metadata.title = media.title
-            metadata.studio = 'Masterclass'
+            metadata.studio = 'Udemy.com'
 
 
     def addFilePath(self, filePaths, newFilePath):
