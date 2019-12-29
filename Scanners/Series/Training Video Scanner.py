@@ -11,9 +11,9 @@ YEAR_REGEX = r'^(?P<year>[0-9]{4})$'
 # default PMS data location
 LOC_WIN = '%LOCALAPPDATA%\Plex Media Server'
 LOC_MAC = '$HOME/Library/Application Support/Plex Media Server'
-LOC_LIN = '$PLEX_HOME/Library/Application Support/Plex Media Server'
+LOC_LIN = '/config/Library/Application Support/Plex Media Server'
 
-loggingPath = 'P:\AppData\Plex Media Server\Logs' #os.path.expandvars(LOC_WIN)
+loggingPath = '/config/Library/Application Support/Plex Media Server/Logs/PMS Plugin Log'
 
 # setup logging
 LOG_FORMAT = '%(asctime)s| %(levelname)-8s| %(message)s'
